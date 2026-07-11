@@ -141,6 +141,17 @@
   }
   .audit-chip.hot{ background:var(--magenta); color:#fff; border-color:var(--magenta); font-weight:700; }
 
+  .bpm-mock{
+    background:#fff; border:1px solid var(--line); border-radius:16px; padding:18px 14px;
+    box-shadow:0 30px 60px -30px rgba(74,20,140,.3);
+  }
+  .bpm-mock svg{ width:100%; height:auto; display:block; }
+  .bpm-lane-label{ font-family:var(--mono); font-size:10px; fill:var(--muted); }
+  .bpm-lane-label.hot{ fill:var(--magenta); font-weight:700; }
+  .bpm-node-label{ font-family:var(--mono); font-size:8.5px; fill:var(--muted); }
+  .bpm-node-label.hot{ fill:var(--magenta); }
+  .bpm-final-label{ font-family:var(--mono); font-size:11px; fill:var(--purple); font-weight:700; }
+
   /* ---------- ch02: diagnostico split ---------- */
   .split{ display:grid; grid-template-columns:1.1fr .9fr; gap:60px; align-items:center; }
   .pain-list{ list-style:none; margin-top:28px; display:flex; flex-direction:column; gap:14px; }
@@ -327,14 +338,68 @@
   <section class="chapter" id="ch1" data-label="El As Is del Registro">
     <div class="act-tag"><span class="dot"></span> Acto I · ConquApp</div>
     <div class="eyebrow">Capítulo 01 — El As Is - ConquApp</div>
-    <h2>Antes de construir nada, hubo que entender todo</h2>
-    <p class="lede">El punto de partida fue mapear el As-Is: cómo llegaba la data de cada auditoría de CAM al registro consolidado de Payment Integrity. Fue ahí donde se identificó los puntos de dolor de cada área.</p>
-    <div class="audit-grid">
-      <div class="audit-chip">Retrospectiva</div>
-      <div class="audit-chip">Reembolsos</div>
-      <div class="audit-chip">SCTR</div>
-      <div class="audit-chip hot">Concurrente</div>
-      <div class="audit-chip">+ otras líneas</div>
+    <div class="split">
+      <div>
+        <h2>Antes de construir nada, hubo que entender todo</h2>
+        <p class="lede">El punto de partida fue mapear el As-Is: cómo llegaba la data de cada auditoría de CAM al registro consolidado de Payment Integrity. Fue ahí donde se identificó los puntos de dolor de cada área.</p>
+        <div class="audit-grid">
+          <div class="audit-chip">Retrospectiva</div>
+          <div class="audit-chip">Reembolsos</div>
+          <div class="audit-chip">SCTR</div>
+          <div class="audit-chip hot">Concurrente</div>
+          <div class="audit-chip">+ otras líneas</div>
+        </div>
+      </div>
+      <div class="bpm-mock">
+        <svg viewBox="0 0 640 300" xmlns="http://www.w3.org/2000/svg">
+          <!-- Retrospectiva -->
+          <text class="bpm-lane-label" x="4" y="26">Retrospectiva</text>
+          <line x1="176" y1="30" x2="480" y2="30" stroke="var(--line)" stroke-width="2"/>
+          <line x1="480" y1="30" x2="572" y2="150" stroke="var(--line)" stroke-width="2"/>
+          <circle cx="170" cy="30" r="6" fill="var(--purple)"/>
+          <text class="bpm-node-label" x="170" y="16" text-anchor="middle">Auditoría</text>
+
+          <!-- Reembolsos -->
+          <text class="bpm-lane-label" x="4" y="86">Reembolsos</text>
+          <line x1="176" y1="90" x2="480" y2="90" stroke="var(--line)" stroke-width="2"/>
+          <line x1="480" y1="90" x2="572" y2="150" stroke="var(--line)" stroke-width="2"/>
+          <circle cx="170" cy="90" r="6" fill="var(--purple)"/>
+          <text class="bpm-node-label" x="170" y="76" text-anchor="middle">Auditoría</text>
+
+          <!-- SCTR -->
+          <text class="bpm-lane-label" x="4" y="146">SCTR</text>
+          <line x1="176" y1="150" x2="480" y2="150" stroke="var(--line)" stroke-width="2"/>
+          <line x1="480" y1="150" x2="572" y2="150" stroke="var(--line)" stroke-width="2"/>
+          <circle cx="170" cy="150" r="6" fill="var(--purple)"/>
+          <text class="bpm-node-label" x="170" y="136" text-anchor="middle">Auditoría</text>
+
+          <!-- Concurrente (resaltada) -->
+          <text class="bpm-lane-label hot" x="4" y="206">Concurrente</text>
+          <line x1="90" y1="210" x2="390" y2="210" stroke="var(--magenta)" stroke-width="3"/>
+          <line x1="390" y1="210" x2="480" y2="210" stroke="var(--magenta)" stroke-width="3"/>
+          <line x1="480" y1="210" x2="572" y2="150" stroke="var(--magenta)" stroke-width="3"/>
+          <circle cx="90" cy="210" r="7" fill="var(--magenta)"/>
+          <circle cx="190" cy="210" r="7" fill="var(--magenta)"/>
+          <circle cx="290" cy="210" r="7" fill="var(--magenta)"/>
+          <circle cx="390" cy="210" r="7" fill="var(--magenta)"/>
+          <text class="bpm-node-label hot" x="90" y="230" text-anchor="middle">Expediente físico</text>
+          <text class="bpm-node-label hot" x="190" y="230" text-anchor="middle">Digitación manual</text>
+          <text class="bpm-node-label hot" x="290" y="230" text-anchor="middle">Limpieza gerente</text>
+          <text class="bpm-node-label hot" x="390" y="230" text-anchor="middle">Validación</text>
+
+          <!-- + otras líneas -->
+          <text class="bpm-lane-label" x="4" y="266">+ otras líneas</text>
+          <line x1="176" y1="270" x2="480" y2="270" stroke="var(--line)" stroke-width="2"/>
+          <line x1="480" y1="270" x2="572" y2="150" stroke="var(--line)" stroke-width="2"/>
+          <circle cx="170" cy="270" r="6" fill="var(--purple)"/>
+          <text class="bpm-node-label" x="170" y="256" text-anchor="middle">Auditoría</text>
+
+          <!-- Nodo final compartido -->
+          <circle cx="580" cy="150" r="11" fill="#fff" stroke="var(--purple)" stroke-width="2.5"/>
+          <text class="bpm-final-label" x="580" y="176" text-anchor="middle">Payment</text>
+          <text class="bpm-final-label" x="580" y="188" text-anchor="middle">Integrity</text>
+        </svg>
+      </div>
     </div>
   </section>
 
