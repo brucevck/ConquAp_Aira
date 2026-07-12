@@ -397,24 +397,14 @@
   }
   .replay-btn:hover{ background:rgba(255,255,255,.2); }
 
-  /* ---------- ch09: stack ---------- */
-  .stack-row{ display:flex; gap:16px; margin-top:40px; flex-wrap:wrap; }
-  .stack-chip{
-    display:flex; align-items:center; gap:12px; background:#fff; border:1px solid var(--line);
-    border-radius:14px; padding:16px 20px; min-width:200px;
-  }
-  .stack-chip .ic{ width:38px; height:38px; border-radius:10px; display:flex; align-items:center; justify-content:center; color:#fff; font-size:15px; flex-shrink:0; }
-  .stack-chip .tx strong{ display:block; font-size:13.5px; }
-  .stack-chip .tx span{ font-size:11.5px; color:var(--muted); }
-
-  /* ---------- ch10: resultados piloto ---------- */
+  /* ---------- ch09: resultados piloto ---------- */
   .result-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:20px; margin-top:40px; }
   .result-card{ background:var(--tint); border-radius:16px; padding:26px; }
   .result-card .n{ font-family:var(--disp); font-weight:800; font-size:38px; color:var(--magenta); }
   .result-card .l{ font-size:13px; color:var(--muted); margin-top:8px; line-height:1.4; }
   .caveat{ margin-top:26px; font-size:12px; color:var(--muted); font-style:italic; }
 
-  /* ---------- ch11: cierre ---------- */
+  /* ---------- ch10: cierre ---------- */
   .closing{ align-items:center; text-align:center; }
   .closing h2{ margin-left:auto; margin-right:auto; max-width:20ch; }
   .ask-row{ display:flex; gap:14px; justify-content:center; margin-top:36px; flex-wrap:wrap; }
@@ -442,7 +432,7 @@
     <div class="rail__progress" id="railProgress"></div>
     <div class="rail__dots" id="railDots"></div>
   </div>
-  <div class="rail__count"><span id="chNow">00</span>/<span id="chTotal">11</span></div>
+  <div class="rail__count"><span id="chNow">00</span>/<span id="chTotal">10</span></div>
 </nav>
 
 <main>
@@ -947,22 +937,9 @@
     </div>
   </section>
 
-  <!-- 09 STACK -->
-  <section class="chapter chapter--tint" id="ch9" data-label="Cómo se hizo">
-    <div class="eyebrow">Capítulo 09 — Sobre qué se construyó</div>
-    <h2>Plataforma corporativa existente — sin infraestructura nueva</h2>
-    <p class="lede">El mismo principio de ConquApp: low-code, rápido, sostenible por el equipo que ya lo opera.</p>
-    <div class="stack-row">
-      <div class="stack-chip"><div class="ic" style="background:var(--magenta);"><i class="fa-solid fa-comments"></i></div><div class="tx"><strong>Copilot Studio</strong><span>Orquestación del agente</span></div></div>
-      <div class="stack-chip"><div class="ic" style="background:var(--purple);"><i class="fa-solid fa-brain"></i></div><div class="tx"><strong>AI Builder</strong><span>Extracción documental</span></div></div>
-      <div class="stack-chip"><div class="ic" style="background:var(--cyan);"><i class="fa-solid fa-diagram-project"></i></div><div class="tx"><strong>Power Automate</strong><span>Flujos y notificaciones</span></div></div>
-      <div class="stack-chip"><div class="ic" style="background:var(--gold); color:#1D1030;"><i class="fa-solid fa-folder-tree"></i></div><div class="tx"><strong>SharePoint</strong><span>Registro y trazabilidad</span></div></div>
-    </div>
-  </section>
-
-  <!-- 10 RESULTADOS PILOTO -->
-  <section class="chapter" id="ch10" data-label="Resultados">
-    <div class="eyebrow">Capítulo 10 — AIRA, primeros resultados de piloto</div>
+  <!-- 09 RESULTADOS PILOTO -->
+  <section class="chapter" id="ch9" data-label="Resultados">
+    <div class="eyebrow">Capítulo 09 — AIRA, primeros resultados de piloto</div>
     <h2>Recién empieza — y ya valida el modelo</h2>
     <div class="result-grid">
       <div class="result-card"><div class="n">-82%</div><div class="l">tiempo de registro por caso (45 → 8 min)</div></div>
@@ -972,9 +949,9 @@
     <p class="caveat">*Cifras ilustrativas de esta presentación — reemplazar con el reporte oficial del piloto.</p>
   </section>
 
-  <!-- 11 CIERRE -->
-  <section class="chapter chapter--dark closing" id="ch11" data-label="Cierre">
-    <div class="eyebrow" style="justify-content:center;">Capítulo 11 — Qué sigue</div>
+  <!-- 10 CIERRE -->
+  <section class="chapter chapter--dark closing" id="ch10" data-label="Cierre">
+    <div class="eyebrow" style="justify-content:center;">Capítulo 10 — Qué sigue</div>
     <h2>De dos quick wins a un ecosistema de contención inteligente</h2>
     <p class="lede">ConquApp ya demostró el modelo. AIRA lo está extendiendo. El siguiente paso es escalar ambos con el mismo estándar de trazabilidad para todas las líneas de Payment Integrity.</p>
     <div class="ask-row">
