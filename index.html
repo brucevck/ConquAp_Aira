@@ -309,9 +309,61 @@
   .doc-lines .ln.box{ background:rgba(255,185,0,.18); border:1px dashed var(--gold); height:14px; }
   .mail-mock{ background:#fff; border-radius:10px; padding:14px; color:#1D1030; font-family:var(--mono); font-size:11px; }
   .mail-mock .subj{ font-weight:700; margin-bottom:6px; }
-  .mail-mock .ln2{ height:7px; background:#EDE3F2; border-radius:3px; margin-top:6px; }
-  .dbars{ display:flex; align-items:flex-end; gap:10px; height:110px; }
-  .dbars div{ flex:1; background:linear-gradient(180deg,var(--cyan),var(--purple)); border-radius:4px 4px 0 0; }
+  .mail-mock .kv{ display:flex; justify-content:space-between; font-size:10.5px; margin-top:7px; color:var(--muted); }
+  .mail-mock .kv b{ color:var(--purple); }
+
+  .aira-chat{ display:flex; flex-direction:column; gap:12px; }
+  .aira-bubble{
+    background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.15); border-radius:12px;
+    border-top-left-radius:4px; padding:12px 14px; font-family:var(--body); font-size:12.5px; color:#fff; line-height:1.5;
+  }
+  .aira-options{ display:flex; flex-direction:column; gap:8px; }
+  .aira-opt{
+    font-family:var(--mono); font-size:11.5px; padding:9px 12px; border-radius:8px; border:1px solid rgba(255,255,255,.18);
+    color:rgba(255,255,255,.5); display:flex; align-items:center; gap:8px;
+  }
+  .aira-opt i{ color:rgba(255,255,255,.3); font-size:11px; }
+  .aira-opt.selected{ border-color:var(--gold); color:#fff; background:rgba(255,185,0,.12); font-weight:700; }
+  .aira-opt.selected i{ color:var(--gold); }
+
+  .pdf-sheet{ background:#F3EAF7; border-radius:8px; padding:16px 18px; min-height:150px; }
+  .pdf-sheet__title{ font-family:var(--disp); font-weight:700; font-size:12px; color:var(--purple); margin-bottom:10px; padding-bottom:8px; border-bottom:1px solid rgba(74,20,140,.15); }
+  .pdf-sheet__block{ margin-bottom:12px; }
+  .pdf-sheet__line{ height:6px; background:rgba(74,20,140,.18); border-radius:2px; margin-bottom:6px; }
+  .pdf-sheet__table{ margin-top:10px; border-top:1px dashed rgba(74,20,140,.25); padding-top:8px; display:flex; flex-direction:column; gap:5px; }
+  .pdf-sheet__row{ display:flex; gap:10px; }
+  .pdf-sheet__row span{ height:6px; background:rgba(74,20,140,.14); border-radius:2px; flex:1; }
+
+  .sp-list{ display:flex; flex-direction:column; font-family:var(--mono); font-size:10.5px; border-radius:8px; overflow:hidden; border:1px solid rgba(255,255,255,.14); }
+  .sp-row{ display:grid; grid-template-columns:1.3fr 1fr 1fr 1fr; gap:6px; padding:8px 10px; color:rgba(255,255,255,.6); }
+  .sp-row.head{ background:rgba(255,255,255,.08); color:rgba(255,255,255,.85); font-weight:700; text-transform:uppercase; letter-spacing:.05em; font-size:9.5px; }
+  .sp-row:not(.head){ border-top:1px solid rgba(255,255,255,.08); }
+  .sp-row.new{ background:rgba(0,183,195,.16); color:#fff; border-left:3px solid var(--cyan); padding-left:7px; }
+
+  /* ---------- ch08: dual-lane (AIRA + módulo ConquApp seguimiento) ---------- */
+  .demo-lane{
+    border:1.5px dashed rgba(255,255,255,.18); border-radius:16px; padding:22px 20px 14px; position:relative;
+  }
+  .demo-lane__label{
+    position:absolute; top:-11px; left:16px; background:#120722; padding:0 8px;
+    font-family:var(--mono); font-size:10.5px; letter-spacing:.08em; text-transform:uppercase; font-weight:700;
+  }
+  .demo-lane .demo-pipeline{ margin-bottom:0; }
+  .demo-lane .demo-pipeline::before{ top:18px; }
+  .demo-lane .demo-node{ width:15%; }
+  .demo-lane .demo-node .ic{ width:36px; height:36px; font-size:13px; margin-bottom:8px; }
+  .demo-lane .demo-node .lb{ font-size:9px; }
+  .demo-lane-connector{
+    width:2px; height:26px; margin:0 auto;
+    background:repeating-linear-gradient(180deg, rgba(255,255,255,.35) 0 6px, transparent 6px 12px);
+  }
+  #demoStage{ min-height:250px; margin-top:28px; }
+
+  .trk-tabs{ display:flex; gap:6px; }
+  .trk-tab{ font-family:var(--mono); font-size:10px; padding:6px 12px; border-radius:20px; border:1px solid rgba(255,255,255,.18); color:rgba(255,255,255,.5); }
+  .trk-tab.active{ background:var(--magenta); border-color:var(--magenta); color:#fff; font-weight:700; }
+  .trk-case{ font-family:var(--mono); font-size:11px; color:#fff; background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.15); border-radius:8px; padding:8px 12px; }
+  .trk-btn{ font-family:var(--mono); font-size:11px; font-weight:700; background:var(--magenta); color:#fff; border:none; border-radius:20px; padding:8px 16px; }
   .replay-btn{
     margin-top:22px; font-family:var(--mono); font-size:12px; color:#fff; background:rgba(255,255,255,.1);
     border:1px solid rgba(255,255,255,.3); padding:9px 18px; border-radius:24px; cursor:pointer; transition:.2s;
@@ -670,50 +722,136 @@
     <h2>De un PDF suelto a un caso contenido y medido</h2>
     <p class="lede" style="margin-bottom:0;">La animación se reproduce sola — no necesitas hacer nada.</p>
     <div class="demo-shell" id="demoShell">
-      <div class="demo-pipeline" id="demoPipeline">
-        <div class="demo-node" data-i="0"><div class="ic"><i class="fa-solid fa-file-pdf"></i></div><div class="lb">PDF recibido</div></div>
-        <div class="demo-node" data-i="1"><div class="ic"><i class="fa-solid fa-wand-magic-sparkles"></i></div><div class="lb">Extracción IA</div></div>
-        <div class="demo-node" data-i="2"><div class="ic"><i class="fa-solid fa-clipboard-check"></i></div><div class="lb">Registro</div></div>
-        <div class="demo-node" data-i="3"><div class="ic"><i class="fa-solid fa-envelope"></i></div><div class="lb">Aviso por correo</div></div>
-        <div class="demo-node" data-i="4"><div class="ic"><i class="fa-solid fa-chart-column"></i></div><div class="lb">Dashboard</div></div>
-        <div class="demo-node" data-i="5"><div class="ic"><i class="fa-solid fa-magnifying-glass-chart"></i></div><div class="lb">Seguimiento</div></div>
+      <div class="demo-lane">
+        <div class="demo-lane__label" style="color:var(--cyan);">AIRA</div>
+        <div class="demo-pipeline" id="demoPipeline">
+          <div class="demo-node" data-i="0"><div class="ic"><i class="fa-solid fa-comments"></i></div><div class="lb">Menú AIRA</div></div>
+          <div class="demo-node" data-i="1"><div class="ic"><i class="fa-solid fa-file-pdf"></i></div><div class="lb">PDF adjuntado</div></div>
+          <div class="demo-node" data-i="2"><div class="ic"><i class="fa-solid fa-wand-magic-sparkles"></i></div><div class="lb">Extracción IA</div></div>
+          <div class="demo-node" data-i="3"><div class="ic"><i class="fa-solid fa-clipboard-check"></i></div><div class="lb">Registro automático</div></div>
+          <div class="demo-node" data-i="4"><div class="ic"><i class="fa-solid fa-envelope"></i></div><div class="lb">Aviso por correo</div></div>
+        </div>
+      </div>
+      <div class="demo-lane-connector"></div>
+      <div class="demo-lane">
+        <div class="demo-lane__label" style="color:var(--magenta);">MÓDULO CONQUAPP — SEGUIMIENTO UPR</div>
+        <div class="demo-pipeline" id="demoPipeline2">
+          <div class="demo-node" data-i="5"><div class="ic"><i class="fa-solid fa-magnifying-glass"></i></div><div class="lb">Búsqueda</div></div>
+          <div class="demo-node" data-i="6"><div class="ic"><i class="fa-solid fa-paper-plane"></i></div><div class="lb">Asignación</div></div>
+          <div class="demo-node" data-i="7"><div class="ic"><i class="fa-solid fa-pen-to-square"></i></div><div class="lb">Actualización</div></div>
+          <div class="demo-node" data-i="8"><div class="ic"><i class="fa-solid fa-circle-check"></i></div><div class="lb">Cierre</div></div>
+        </div>
       </div>
       <div class="demo-stage" id="demoStage">
         <div class="demo-panel" data-i="0">
-          <div class="demo-visual"><div class="doc-lines">
-            <div class="ln" style="width:60%;"></div><div class="ln" style="width:85%;"></div>
-            <div class="ln" style="width:40%;"></div><div class="ln" style="width:70%;"></div>
-            <div class="ln" style="width:55%;"></div>
-          </div></div>
-          <div class="demo-copy"><div class="tag">Entrada</div><h3>Llega un PDF sin estructurar</h3><p>Un expediente o correo derivado, tal como llegaba antes — sin campos, sin formato fijo.</p></div>
+          <div class="demo-visual">
+            <div class="aira-chat">
+              <div class="aira-bubble">Hola, soy AIRA. ¿Qué necesitas registrar hoy?</div>
+              <div class="aira-options">
+                <div class="aira-opt selected"><i class="fa-solid fa-circle-check"></i> Registrar alerta UPR</div>
+                <div class="aira-opt"><i class="fa-regular fa-circle"></i> Alerta eventos adversos</div>
+                <div class="aira-opt"><i class="fa-regular fa-circle"></i> Otros</div>
+              </div>
+            </div>
+          </div>
+          <div class="demo-copy"><div class="tag">Menú</div><h3>Menú AIRA</h3><p>Hoy AIRA cubre UPR — con vocación de escalar a otras líneas.</p></div>
         </div>
         <div class="demo-panel" data-i="1">
+          <div class="demo-visual">
+            <div class="pdf-sheet">
+              <div class="pdf-sheet__title">Derivación — Caso UPR</div>
+              <div class="pdf-sheet__block">
+                <div class="pdf-sheet__line" style="width:70%;"></div>
+                <div class="pdf-sheet__line" style="width:45%;"></div>
+              </div>
+              <div class="pdf-sheet__block" style="margin-left:12%;">
+                <div class="pdf-sheet__line" style="width:55%;"></div>
+                <div class="pdf-sheet__line" style="width:80%;"></div>
+                <div class="pdf-sheet__line" style="width:40%;"></div>
+              </div>
+              <div class="pdf-sheet__table">
+                <div class="pdf-sheet__row"><span style="flex:0 0 30%;"></span><span style="flex:0 0 50%;"></span></div>
+                <div class="pdf-sheet__row"><span style="flex:0 0 25%;"></span><span style="flex:0 0 60%;"></span></div>
+              </div>
+            </div>
+          </div>
+          <div class="demo-copy"><div class="tag">Entrada</div><h3>Llega un PDF adjunto</h3><p>Un expediente o correo derivado, tal como llegaba antes — sin campos, sin formato fijo.</p></div>
+        </div>
+        <div class="demo-panel" data-i="2">
           <div class="demo-visual"><div class="doc-lines">
+            <div class="ln" style="width:50%; height:12px; background:rgba(255,255,255,.22);"></div>
             <div class="ln box" style="width:55%;"></div><div class="ln" style="width:85%;"></div>
-            <div class="ln box" style="width:35%;"></div><div class="ln box" style="width:65%;"></div>
+            <div class="ln box" style="width:35%; margin-left:12%;"></div><div class="ln box" style="width:65%; margin-left:12%;"></div>
             <div class="ln" style="width:50%;"></div>
           </div></div>
           <div class="demo-copy"><div class="tag">IA Builder</div><h3>AIRA extrae los campos clave</h3><p>N° de siniestro, DNI, monto y tipo de alerta se identifican automáticamente del documento.</p></div>
         </div>
-        <div class="demo-panel" data-i="2">
-          <div class="demo-visual"><div class="doc-lines">
-            <div class="ln" style="width:90%; background:rgba(0,183,195,.3);"></div>
-            <div class="ln" style="width:75%; background:rgba(0,183,195,.3);"></div>
-            <div class="ln" style="width:82%; background:rgba(0,183,195,.3);"></div>
-          </div></div>
+        <div class="demo-panel" data-i="3">
+          <div class="demo-visual">
+            <div class="sp-list">
+              <div class="sp-row head"><div>N° Caso</div><div>Línea</div><div>Estado</div><div>Fecha</div></div>
+              <div class="sp-row"><div>CC-2026-04390</div><div>UPR</div><div>Aprobado</div><div>08/07</div></div>
+              <div class="sp-row new"><div>CC-2026-04471</div><div>UPR</div><div>Pendiente</div><div>12/07</div></div>
+            </div>
+          </div>
           <div class="demo-copy"><div class="tag">Copilot Studio</div><h3>El caso queda registrado</h3><p>Se estructura en SharePoint con estado, responsable y evidencia trazable — listo para auditar.</p></div>
         </div>
-        <div class="demo-panel" data-i="3">
-          <div class="demo-visual"><div class="mail-mock"><div class="subj">Nueva alerta registrada — Caso #4471</div><div class="ln2" style="width:80%;"></div><div class="ln2" style="width:60%;"></div><div class="ln2" style="width:70%;"></div></div></div>
+        <div class="demo-panel" data-i="4">
+          <div class="demo-visual"><div class="mail-mock">
+            <div class="subj">Nueva alerta registrada — Caso CC-2026-04471</div>
+            <div class="kv"><span>N° de caso</span><b>CC-2026-04471</b></div>
+            <div class="kv"><span>Línea</span><b>UPR</b></div>
+            <div class="kv"><span>Monto</span><b>S/ 1,200</b></div>
+            <div class="kv"><span>Estado</span><b>Pendiente</b></div>
+          </div></div>
           <div class="demo-copy"><div class="tag">Power Automate</div><h3>Se notifica automáticamente</h3><p>El responsable recibe el aviso sin tener que revisar bandejas ni esperar el correo manual.</p></div>
         </div>
-        <div class="demo-panel" data-i="4">
-          <div class="demo-visual"><div class="dbars"><div style="height:40%;"></div><div style="height:65%;"></div><div style="height:50%;"></div><div style="height:85%;"></div><div style="height:70%;"></div></div></div>
-          <div class="demo-copy"><div class="tag">Dashboard</div><h3>La contención se vuelve visible</h3><p>Cada caso suma al consolidado de Payment Integrity, en tiempo real y por línea de negocio.</p></div>
-        </div>
         <div class="demo-panel" data-i="5">
-          <div class="demo-visual" style="display:flex; align-items:center; justify-content:center;"><i class="fa-solid fa-circle-check" style="font-size:56px; color:var(--cyan);"></i></div>
-          <div class="demo-copy"><div class="tag">Cierre del ciclo</div><h3>Seguimiento hasta la resolución</h3><p>El caso se sigue hasta su cierre — con la misma trazabilidad que ya probó ConquApp.</p></div>
+          <div class="demo-visual">
+            <div class="trk-tabs">
+              <div class="trk-tab active">Abierto</div>
+              <div class="trk-tab">En seguimiento</div>
+              <div class="trk-tab">Cerrado</div>
+            </div>
+            <div class="sp-list" style="margin-top:12px;">
+              <div class="sp-row head"><div>N° Caso</div><div>Línea</div><div>Estado</div><div>Fecha</div></div>
+              <div class="sp-row"><div>CC-2026-04471</div><div>UPR</div><div>Pendiente</div><div>12/07</div></div>
+              <div class="sp-row"><div>CC-2026-04502</div><div>UPR</div><div>Pendiente</div><div>12/07</div></div>
+            </div>
+          </div>
+          <div class="demo-copy"><div class="tag">ConquApp</div><h3>Búsqueda de abiertos</h3><p>El equipo filtra los casos que AIRA registró y siguen abiertos — todo en el mismo dashboard de ConquApp.</p></div>
+        </div>
+        <div class="demo-panel" data-i="6">
+          <div class="demo-visual">
+            <div class="trk-case">CC-2026-04471 — ROJAS QUISPE, L.</div>
+            <div class="pa-field" style="margin-top:10px;"><label>Asignar a auditor de clínica</label><div class="box">M. Fernández <i class="fa-solid fa-chevron-down" style="margin-left:auto;font-size:9px;color:rgba(255,255,255,.35);"></i></div></div>
+            <div style="display:flex; align-items:center; gap:10px; margin-top:12px;">
+              <button class="trk-btn">Asignar</button>
+              <i class="fa-solid fa-diagram-project" style="color:var(--cyan); font-size:16px;"></i>
+            </div>
+          </div>
+          <div class="demo-copy"><div class="tag">Power Automate</div><h3>Asignación a clínica</h3><p>El correo se reenvía reutilizando el mismo hilo e ID que generó AIRA — no se redacta de nuevo, solo se reenvía con contexto.</p></div>
+        </div>
+        <div class="demo-panel" data-i="7">
+          <div class="demo-visual">
+            <div class="trk-case">CC-2026-04471 — ROJAS QUISPE, L.</div>
+            <div class="pa-field" style="margin-top:10px;"><label>Estado</label><div class="box"><span style="text-decoration:line-through; opacity:.5;">Abierto</span><i class="fa-solid fa-arrow-right" style="margin:0 6px; font-size:9px; color:rgba(255,255,255,.4);"></i><span style="color:var(--cyan);">En seguimiento</span></div></div>
+            <div class="pa-field"><label>Observación levantada</label><div class="box"></div></div>
+            <div class="pa-field"><label>Evidencia adjunta</label><div class="box"></div></div>
+          </div>
+          <div class="demo-copy"><div class="tag">Estado</div><h3>Actualización de estado</h3><p>El auditor de clínica registra el avance directamente — el estado cambia sin depender de un correo de vuelta.</p></div>
+        </div>
+        <div class="demo-panel" data-i="8">
+          <div class="demo-visual" style="display:flex; align-items:center;">
+            <div style="display:flex; align-items:center; gap:14px;">
+              <i class="fa-solid fa-circle-check" style="font-size:44px; color:var(--cyan);"></i>
+              <div>
+                <div class="trk-case" style="margin-bottom:8px;">CC-2026-04471 — ROJAS QUISPE, L.</div>
+                <span class="pa-badge approved">Cerrado</span>
+              </div>
+            </div>
+          </div>
+          <div class="demo-copy"><div class="tag">Cierre del ciclo</div><h3>Cierre del caso</h3><p>Tras la respuesta del auditor de clínica, el caso se cierra con la misma trazabilidad de extremo a extremo.</p></div>
         </div>
       </div>
       <button class="replay-btn" id="replayBtn"><i class="fa-solid fa-rotate-right"></i> Reproducir de nuevo</button>
@@ -844,7 +982,7 @@
     demoObserver.observe(demoShell);
   }
   initDemo('demoShellConqu', 'replayBtnConqu', 3200);
-  initDemo('demoShell', 'replayBtn', 2200);
+  initDemo('demoShell', 'replayBtn', 2600);
 
   // ---- reveal-on-scroll for chapters ----
   const revealObserver = new IntersectionObserver((entries) => {
