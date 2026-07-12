@@ -204,19 +204,43 @@
   .stat-card--finding{ display:flex; flex-direction:column; align-items:center; text-align:center; justify-content:center; }
   .stat-card--finding i{ font-size:26px; color:var(--gold); margin-bottom:10px; }
 
-  /* ---------- ch04: solucion before/after ---------- */
-  .ba-wrap{ display:grid; grid-template-columns:1fr auto 1fr; gap:26px; align-items:center; margin-top:44px; }
-  .ba-card{ background:#fff; border:1px solid var(--line); border-radius:16px; padding:28px; }
+  /* ---------- ch04: demo ConquApp + beneficios + before/after compacto ---------- */
+  .conqu-benefits{ list-style:none; margin-top:28px; display:flex; flex-direction:column; gap:10px; }
+  .conqu-benefits li{ display:flex; gap:10px; align-items:flex-start; font-size:14px; line-height:1.45; color:var(--ink); }
+  .conqu-benefits i{ color:var(--cyan); margin-top:3px; flex-shrink:0; }
+
+  .ba-wrap{ display:grid; grid-template-columns:1fr auto 1fr; gap:16px; align-items:center; margin-top:26px; }
+  .ba-card{ background:#fff; border:1px solid var(--line); border-radius:14px; padding:18px 20px; }
   .ba-card.before{ opacity:.75; }
   .ba-card.after{ border-color:var(--cyan); box-shadow:0 20px 50px -28px rgba(0,183,195,.5); }
-  .ba-label{ font-family:var(--mono); font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--muted); margin-bottom:10px;}
-  .ba-time{ font-family:var(--disp); font-weight:800; font-size:44px; }
-  .ba-card.before .ba-time{ color:var(--muted); text-decoration:line-through; text-decoration-color:var(--magenta); text-decoration-thickness:3px;}
+  .ba-label{ font-family:var(--mono); font-size:10px; letter-spacing:.1em; text-transform:uppercase; color:var(--muted); margin-bottom:6px;}
+  .ba-time{ font-family:var(--disp); font-weight:800; font-size:26px; }
+  .ba-card.before .ba-time{ color:var(--muted); text-decoration:line-through; text-decoration-color:var(--magenta); text-decoration-thickness:2px;}
   .ba-card.after .ba-time{ color:var(--cyan); }
-  .ba-arrow{ font-size:22px; color:var(--purple); }
-  .feature-row{ margin-top:14px; display:flex; flex-direction:column; gap:8px; }
-  .feature-row div{ font-size:13.5px; color:var(--muted); display:flex; gap:8px; }
+  .ba-arrow{ font-size:18px; color:var(--purple); }
+  .feature-row{ margin-top:8px; display:flex; flex-direction:column; gap:5px; }
+  .feature-row div{ font-size:12px; color:var(--muted); display:flex; gap:6px; }
   .feature-row i{ color:var(--cyan); margin-top:3px; }
+
+  .pa-field{ display:flex; flex-direction:column; gap:4px; margin-bottom:12px; }
+  .pa-field label{ font-family:var(--mono); font-size:10px; color:rgba(255,255,255,.5); text-transform:uppercase; letter-spacing:.06em; }
+  .pa-field .box{
+    min-height:30px; border-radius:8px; background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.18);
+    display:flex; align-items:center; gap:8px; padding:0 10px; font-family:var(--mono); font-size:11.5px; color:#fff;
+  }
+  .pa-field .box.warn{ border-color:var(--gold); }
+  .pa-field .box.ok{ border-color:var(--cyan); }
+  .pa-field .hint{ font-family:var(--mono); font-size:9.5px; margin-top:2px; display:flex; align-items:center; gap:5px; }
+  .pa-field .hint.warn{ color:var(--gold); }
+  .pa-badge{ font-family:var(--mono); font-size:10.5px; font-weight:700; padding:4px 12px; border-radius:20px; }
+  .pa-badge.pending{ background:rgba(255,185,0,.18); border:1px solid var(--gold); color:var(--gold); }
+  .pa-badge.approved{ background:rgba(0,183,195,.18); border:1px solid var(--cyan); color:var(--cyan); }
+  .pa-search{ display:flex; align-items:center; gap:10px; background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.18); border-radius:10px; padding:10px 14px; font-family:var(--mono); font-size:11.5px; color:#fff; }
+  .pa-search i{ color:rgba(255,255,255,.4); }
+  .pa-alert{ display:flex; gap:12px; align-items:flex-start; background:rgba(194,24,91,.14); border:1px solid var(--magenta); border-radius:10px; padding:14px; }
+  .pa-alert i{ color:var(--magenta); font-size:17px; margin-top:2px; }
+  .pa-alert .t{ font-family:var(--mono); font-size:11px; color:#fff; line-height:1.5; }
+  .pa-alert .t strong{ color:var(--gold); display:block; margin-bottom:3px; }
 
   /* ---------- ch05: impacto (dashboard mock) ---------- */
   .dash-mock{
@@ -256,7 +280,7 @@
     content:''; position:absolute; top:22px; left:5%; right:5%; height:2px;
     background:repeating-linear-gradient(90deg, rgba(255,255,255,.25) 0 8px, transparent 8px 16px);
   }
-  .demo-node{ position:relative; z-index:2; display:flex; flex-direction:column; align-items:center; width:16%; text-align:center; }
+  .demo-node{ position:relative; z-index:2; display:flex; flex-direction:column; align-items:center; width:16%; text-align:center; cursor:pointer; }
   .demo-node .ic{
     width:44px; height:44px; border-radius:50%; background:#241338; border:2px solid rgba(255,255,255,.25);
     display:flex; align-items:center; justify-content:center; font-size:16px; color:rgba(255,255,255,.4);
@@ -502,26 +526,93 @@
   <!-- 04 SOLUCION -->
   <section class="chapter" id="ch4" data-label="Nace ConquApp">
     <div class="eyebrow">Capítulo 04 — La respuesta: quick win, no un desarrollo</div>
-    <h2>Nace ConquApp — validar en el origen, no limpiar después</h2>
-    <p class="lede">Un equipo de optimización sin desarrolladores dedicados necesitaba una solución low-code, rápida, que se pudiera usar desde la clínica. Power Apps + SharePoint + un dashboard fueron suficientes.</p>
-    <div class="ba-wrap">
-      <div class="ba-card before">
-        <div class="ba-label">Antes</div>
-        <div class="ba-time">5–8<span style="font-size:16px;">min/registro</span></div>
-        <div class="feature-row">
-          <div><i class="fa-solid fa-xmark"></i> Sin validación de campos</div>
-          <div><i class="fa-solid fa-xmark"></i> Espera de 4 días por corrección de clínica</div>
-          <div><i class="fa-solid fa-xmark"></i> Duplicados invisibles en cambio de turno</div>
+    <div class="split">
+      <div class="demo-shell" id="demoShellConqu">
+        <div class="demo-pipeline" id="demoPipelineConqu">
+          <div class="demo-node" data-i="0"><div class="ic"><i class="fa-solid fa-file-pen"></i></div><div class="lb">Formulario</div></div>
+          <div class="demo-node" data-i="1"><div class="ic"><i class="fa-solid fa-shield-halved"></i></div><div class="lb">Validación</div></div>
+          <div class="demo-node" data-i="2"><div class="ic"><i class="fa-solid fa-hourglass-half"></i></div><div class="lb">Pendiente</div></div>
+          <div class="demo-node" data-i="3"><div class="ic"><i class="fa-solid fa-magnifying-glass"></i></div><div class="lb">Búsqueda</div></div>
+          <div class="demo-node" data-i="4"><div class="ic"><i class="fa-solid fa-circle-check"></i></div><div class="lb">Aprobado</div></div>
+          <div class="demo-node" data-i="5"><div class="ic"><i class="fa-solid fa-triangle-exclamation"></i></div><div class="lb">Duplicado</div></div>
         </div>
+        <div class="demo-stage" id="demoStageConqu">
+          <div class="demo-panel" data-i="0">
+            <div class="demo-visual">
+              <div class="pa-field"><label>DNI</label><div class="box"></div></div>
+              <div class="pa-field"><label>Monto</label><div class="box"></div></div>
+              <div class="pa-field"><label>Tipo de observación</label><div class="box">Seleccionar <i class="fa-solid fa-chevron-down" style="margin-left:auto;font-size:9px;color:rgba(255,255,255,.35);"></i></div></div>
+            </div>
+            <div class="demo-copy"><div class="tag">Ingreso</div><h3>Formulario en clínica</h3><p>El auditor abre ConquApp desde el campo — mismo formulario, sin Excel ni plantillas sueltas.</p></div>
+          </div>
+          <div class="demo-panel" data-i="1">
+            <div class="demo-visual">
+              <div class="pa-field"><label>DNI</label><div class="box warn">4510223</div><div class="hint warn"><i class="fa-solid fa-triangle-exclamation"></i> No calza con sistema core</div></div>
+              <div class="pa-field"><label>Monto</label><div class="box ok">S/ 1,200 <span style="margin-left:auto;font-size:9px;color:var(--cyan);">auto</span></div></div>
+              <div class="pa-field"><label>Tipo de observación</label><div class="box">Monto observado</div></div>
+            </div>
+            <div class="demo-copy"><div class="tag">Validación en tiempo real</div><h3>Valida mientras se digita</h3><p>El DNI se compara contra sistemas core y el monto se autocalcula — el error se marca antes de guardar.</p></div>
+          </div>
+          <div class="demo-panel" data-i="2">
+            <div class="demo-visual">
+              <div class="pa-field"><label>N° de caso</label><div class="box">CC-2026-04471</div></div>
+              <span class="pa-badge pending"><i class="fa-solid fa-hourglass-half" style="margin-right:6px;"></i>Pendiente</span>
+            </div>
+            <div class="demo-copy"><div class="tag">Estado</div><h3>Queda en estado Pendiente</h3><p>El registro se guarda con ID propio de mapeo — trazable desde el primer minuto.</p></div>
+          </div>
+          <div class="demo-panel" data-i="3">
+            <div class="demo-visual">
+              <div class="pa-search"><i class="fa-solid fa-magnifying-glass"></i> CC-2026-04471</div>
+              <div class="pa-field" style="margin-top:14px;"><label>Resultado</label><div class="box">ROJAS QUISPE, L. <span class="pa-badge pending" style="margin-left:auto;">Pendiente</span></div></div>
+            </div>
+            <div class="demo-copy"><div class="tag">Cualquier auditor</div><h3>Otro auditor busca el caso</h3><p>Con el N° de caso, cualquier auditor lo encuentra y continúa — aunque cambie el turno.</p></div>
+          </div>
+          <div class="demo-panel" data-i="4">
+            <div class="demo-visual">
+              <div class="pa-field"><label>N° de caso</label><div class="box">CC-2026-04471 <span class="pa-badge approved" style="margin-left:auto;">Aprobado</span></div></div>
+            </div>
+            <div class="demo-copy"><div class="tag">Aprobación</div><h3>Clínica corrige, pasa a Aprobado</h3><p>En cuanto se levanta la observación, el estado cambia y se refleja en el dashboard gerencial.</p></div>
+          </div>
+          <div class="demo-panel" data-i="5">
+            <div class="demo-visual" style="display:flex; align-items:center;">
+              <div class="pa-alert"><i class="fa-solid fa-triangle-exclamation"></i><div class="t"><strong>Alerta de duplicado</strong>El caso CC-2026-04471 ya existe — mismo ID propio de mapeo.</div></div>
+            </div>
+            <div class="demo-copy"><div class="tag">Power Automate</div><h3>Alerta de duplicado</h3><p>Si alguien intenta registrar el mismo caso otra vez, Power Automate dispara la alerta automáticamente.</p></div>
+          </div>
+        </div>
+        <button class="replay-btn" id="replayBtnConqu"><i class="fa-solid fa-rotate-right"></i> Reproducir de nuevo</button>
       </div>
-      <div class="ba-arrow"><i class="fa-solid fa-arrow-right"></i></div>
-      <div class="ba-card after">
-        <div class="ba-label">Con ConquApp</div>
-        <div class="ba-time">1–2<span style="font-size:16px;">min/registro</span></div>
-        <div class="feature-row">
-          <div><i class="fa-solid fa-check"></i> DNI, montos y duplicados validados en el ingreso</div>
-          <div><i class="fa-solid fa-check"></i> Estados pendiente/aprobado — sin esperar a la clínica</div>
-          <div><i class="fa-solid fa-check"></i> Alerta automática de registro duplicado</div>
+      <div>
+        <h2>Nace ConquApp — validar en el origen, no limpiar después</h2>
+        <p class="lede">Un equipo de optimización sin desarrolladores dedicados necesitaba una solución low-code, rápida, que se pudiera usar desde la clínica. Power Apps + SharePoint + un dashboard fueron suficientes.</p>
+        <ul class="conqu-benefits">
+          <li><i class="fa-solid fa-check"></i> Validación en el origen: DNI, montos y duplicados</li>
+          <li><i class="fa-solid fa-check"></i> Estados pendiente/aprobado con trazabilidad completa</li>
+          <li><i class="fa-solid fa-check"></i> Cualquier auditor puede buscar y continuar un caso, sin depender de quién lo registró</li>
+          <li><i class="fa-solid fa-check"></i> Alerta automática de duplicado vía Power Automate, por ID propio de mapeo</li>
+          <li><i class="fa-solid fa-check"></i> Dashboard gerencial en tiempo real</li>
+          <li><i class="fa-solid fa-check"></i> Cero dependencia del conocimiento tácito de una sola persona</li>
+        </ul>
+        <div class="ba-wrap">
+          <div class="ba-card before">
+            <div class="ba-label">Antes</div>
+            <div class="ba-time">5–8<span style="font-size:12px;">min/registro</span></div>
+            <div class="feature-row">
+              <div><i class="fa-solid fa-xmark"></i> Sin validación de campos</div>
+              <div><i class="fa-solid fa-xmark"></i> Espera de 4 días por corrección de clínica</div>
+              <div><i class="fa-solid fa-xmark"></i> Duplicados invisibles en cambio de turno</div>
+            </div>
+          </div>
+          <div class="ba-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+          <div class="ba-card after">
+            <div class="ba-label">Con ConquApp</div>
+            <div class="ba-time">1–2<span style="font-size:12px;">min/registro</span></div>
+            <div class="feature-row">
+              <div><i class="fa-solid fa-check"></i> DNI, montos y duplicados validados en el ingreso</div>
+              <div><i class="fa-solid fa-check"></i> Estados pendiente/aprobado — sin esperar a la clínica</div>
+              <div><i class="fa-solid fa-check"></i> Alerta automática de registro duplicado</div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -706,41 +797,54 @@
   window.addEventListener('scroll', updateRail, {passive:true});
   updateRail();
 
-  // ---- Demo autoplay sequence (ch08) ----
-  const demoShell = document.getElementById('demoShell');
-  const nodes = Array.from(demoShell.querySelectorAll('.demo-node'));
-  const panels = Array.from(demoShell.querySelectorAll('.demo-panel'));
-  const STAGE_MS = 2200;
-  let demoTimer = null, demoStep = -1, demoPlayed = false;
+  // ---- Demo autoplay sequence (parametrizada — ch04 ConquApp y ch08 AIRA) ----
+  function initDemo(shellId, replayId, stageMs){
+    const demoShell = document.getElementById(shellId);
+    if (!demoShell) return;
+    const nodes = Array.from(demoShell.querySelectorAll('.demo-node'));
+    const panels = Array.from(demoShell.querySelectorAll('.demo-panel'));
+    let demoTimer = null, demoStep = -1, demoPlayed = false;
 
-  function setStage(i){
+    function setStage(i){
+      nodes.forEach((n, idx) => {
+        n.classList.toggle('active', idx === i);
+        n.classList.toggle('done', idx < i);
+      });
+      panels.forEach((p) => p.classList.toggle('show', Number(p.dataset.i) === i));
+    }
+    function playDemo(){
+      clearInterval(demoTimer);
+      demoStep = 0;
+      setStage(0);
+      demoTimer = setInterval(() => {
+        demoStep++;
+        if (demoStep >= nodes.length){ clearInterval(demoTimer); return; }
+        setStage(demoStep);
+      }, stageMs);
+    }
     nodes.forEach((n, idx) => {
-      n.classList.toggle('active', idx === i);
-      n.classList.toggle('done', idx < i);
-    });
-    panels.forEach((p) => p.classList.toggle('show', Number(p.dataset.i) === i));
-  }
-  function playDemo(){
-    clearInterval(demoTimer);
-    demoStep = 0;
-    setStage(0);
-    demoTimer = setInterval(() => {
-      demoStep++;
-      if (demoStep >= nodes.length){ clearInterval(demoTimer); return; }
-      setStage(demoStep);
-    }, STAGE_MS);
-  }
-  document.getElementById('replayBtn').addEventListener('click', playDemo);
-
-  const demoObserver = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting && !demoPlayed){
+      n.addEventListener('click', () => {
+        clearInterval(demoTimer);
+        demoStep = idx;
         demoPlayed = true;
-        playDemo();
-      }
+        setStage(idx);
+      });
     });
-  }, {threshold:.45});
-  demoObserver.observe(demoShell);
+    const replayBtn = document.getElementById(replayId);
+    if (replayBtn) replayBtn.addEventListener('click', playDemo);
+
+    const demoObserver = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting && !demoPlayed){
+          demoPlayed = true;
+          playDemo();
+        }
+      });
+    }, {threshold:.45});
+    demoObserver.observe(demoShell);
+  }
+  initDemo('demoShellConqu', 'replayBtnConqu', 3200);
+  initDemo('demoShell', 'replayBtn', 2200);
 
   // ---- reveal-on-scroll for chapters ----
   const revealObserver = new IntersectionObserver((entries) => {
