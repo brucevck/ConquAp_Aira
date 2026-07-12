@@ -177,6 +177,10 @@
   }
   .stat-card .num-big{ font-family:var(--disp); font-weight:800; font-size:clamp(34px,3.4vw,50px); color:var(--gold); }
   .stat-card .cap{ font-size:13px; color:#F0DCF2; margin-top:8px; line-height:1.4; }
+  .stat-card--finding{ display:flex; flex-direction:column; align-items:center; text-align:center; justify-content:center; }
+  .stat-card--finding i{ font-size:30px; color:var(--gold); margin-bottom:12px; }
+  .stat-card--finding .fa-stack{ font-size:15px; margin-bottom:12px; }
+  .stat-card--finding .fa-stack i{ margin-bottom:0; }
   .stamp{
     position:absolute; top:14px; right:14px; font-family:var(--mono); font-size:9.5px; letter-spacing:.08em;
     border:1.5px solid var(--gold); color:var(--gold); padding:3px 7px; border-radius:5px; transform:rotate(6deg);
@@ -301,7 +305,8 @@
   @media (max-width:900px){
     .rail{ display:none; }
     main{ margin-left:0; }
-    .split, .ba-wrap, .audit-grid, .stat-board, .kpi-row, .result-grid, .demo-panel{ grid-template-columns:1fr !important; }
+    .split, .ba-wrap, .audit-grid, .kpi-row, .result-grid, .demo-panel{ grid-template-columns:1fr !important; }
+    .stat-board{ grid-template-columns:repeat(2,1fr) !important; }
     .ba-arrow{ transform:rotate(90deg); justify-self:center; }
     .demo-pipeline{ flex-wrap:wrap; gap:16px; }
     .demo-node{ width:28%; }
@@ -434,11 +439,22 @@
     <p class="lede">Al meternos a fondo en la data de concurrente, aparecieron cosas que nadie había podido medir antes — porque nunca existió un sistema que las pudiera detectar.</p>
     <div class="stat-board">
       <div class="stat-card"><div class="num-big">2,500</div><div class="cap">registros mensuales en auditoría concurrente</div></div>
-      <div class="stat-card"><div class="num-big">70%</div><div class="cap">requería revalidación de montos</div></div>
-      <div class="stat-card"><div class="num-big">78%</div><div class="cap">de la data necesitaba limpieza — sin N° de factura ni carta de garantía</div><div class="stamp">evidencia</div></div>
-      <div class="stat-card"><div class="num-big">~20%</div><div class="cap">de discrepancia vs. liquidación final por duplicados y observaciones no aplicadas</div><div class="stamp">evidencia</div></div>
+      <div class="stat-card"><div class="num-big">70%</div><div class="cap">se podía medir contra sistemas core (match por N° de carta/factura)</div></div>
+      <div class="stat-card"><div class="num-big">80%</div><div class="cap">requería limpieza manual, sin N° de factura ni carta de garantía (normal en concurrente: la facturación se genera recién después del visto bueno en clínica)</div><div class="stamp">evidencia</div></div>
+      <div class="stat-card"><div class="num-big">4 días</div><div class="cap">delay promedio hasta que la clínica levantaba la observación</div></div>
+
+      <div class="stat-card stat-card--finding"><i class="fa-solid fa-brain"></i><div class="cap">Dependencia total del conocimiento tácito del gerente para poder limpiar la data</div></div>
+      <div class="stat-card stat-card--finding"><i class="fa-solid fa-rotate"></i><div class="cap">Duplicados invisibles en cambio de turno de auditores</div></div>
+      <div class="stat-card stat-card--finding">
+        <span class="fa-stack">
+          <i class="fa-solid fa-shield-halved fa-stack-1x"></i>
+          <i class="fa-solid fa-slash fa-stack-1x" style="color:var(--magenta);"></i>
+        </span>
+        <div class="cap">Forms sin validación — se podía ingresar cualquier dato en cualquier campo</div>
+      </div>
+      <div class="stat-card stat-card--finding"><i class="fa-solid fa-link-slash"></i><div class="cap">Sin trazabilidad de pendientes cuando rotaba el médico o la clínica</div></div>
     </div>
-    <p class="board-note">El hallazgo real: clínicas que no corregían sus observaciones porque el médico auditor rotaba de turno y se perdía el seguimiento, y auditores registrando el mismo caso dos veces sin saberlo — inflando el recupero sin que nadie se diera cuenta.</p>
+    <p class="board-note">Un 7.1% de las observaciones nunca se aplicaba — se perdía en el limbo cuando rotaba el auditor. Ese fue justamente el hueco que ConquApp resolvió con un ID propio de mapeo. Sigue leyendo.</p>
   </section>
 
   <!-- 04 SOLUCION -->
