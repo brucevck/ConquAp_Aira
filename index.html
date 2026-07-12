@@ -154,9 +154,16 @@
 
   /* ---------- ch02: diagnostico split ---------- */
   .split{ display:grid; grid-template-columns:1.1fr .9fr; gap:60px; align-items:center; }
-  .pain-list{ list-style:none; margin-top:28px; display:flex; flex-direction:column; gap:14px; }
-  .pain-list li{ display:flex; gap:14px; align-items:flex-start; font-size:15px; line-height:1.5; color:var(--ink); }
-  .pain-list i{ color:var(--magenta); margin-top:4px; }
+  .bpm-flow{ margin-top:36px; }
+  .bpm-flow svg{ width:100%; height:auto; display:block; }
+  .bpm-flow-labels{ display:grid; grid-template-columns:repeat(4,1fr); gap:12px; margin-top:6px; text-align:center; }
+  .bpm-flow-label{ display:flex; flex-direction:column; gap:4px; }
+  .bpm-flow-label strong{ font-family:var(--mono); font-size:12px; color:var(--ink); font-weight:700; }
+  .bpm-flow-label.hot strong{ color:var(--magenta); }
+  .bpm-flow-label span{
+    font-family:var(--mono); font-size:10.5px; color:var(--muted); line-height:1.4;
+    display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;
+  }
   .excel-mock{
     background:#fff; border:1px solid var(--line); border-radius:14px; overflow:hidden;
     box-shadow:0 30px 60px -30px rgba(74,20,140,.35);
@@ -309,6 +316,7 @@
     .split, .ba-wrap, .audit-grid, .kpi-row, .result-grid, .demo-panel{ grid-template-columns:1fr !important; }
     .stat-board{ grid-template-columns:1fr !important; }
     .finding-row{ flex-direction:column; }
+    .bpm-flow-labels{ grid-template-columns:repeat(2,1fr); row-gap:20px; }
     .ba-arrow{ transform:rotate(90deg); justify-self:center; }
     .demo-pipeline{ flex-wrap:wrap; gap:16px; }
     .demo-node{ width:28%; }
@@ -417,11 +425,33 @@
       <div>
         <h2>El dolor más álgido estaba en concurrente</h2>
         <p class="lede">Auditores revisando expedientes físicos en clínica, digitando todo a mano en un Excel sin control. El gerente terminaba limpiando la data él mismo, columna por columna, antes de poder reportar el recupero.</p>
-        <ul class="pain-list">
-          <li><i class="fa-solid fa-triangle-exclamation"></i> Sin campos calculados ni listas desplegables — todo digitado a mano</li>
-          <li><i class="fa-solid fa-triangle-exclamation"></i> Montos no comparables contra los sistemas core (N° siniestro, DNI)</li>
-          <li><i class="fa-solid fa-triangle-exclamation"></i> Reprocesos de limpieza que solo el gerente sabía resolver</li>
-        </ul>
+        <div class="bpm-flow">
+          <svg viewBox="0 0 720 120" xmlns="http://www.w3.org/2000/svg">
+            <line x1="112" y1="72" x2="248" y2="72" stroke="var(--line)" stroke-width="2.5"/>
+            <line x1="292" y1="72" x2="420" y2="72" stroke="var(--magenta)" stroke-width="4"/>
+            <line x1="480" y1="72" x2="608" y2="72" stroke="var(--magenta)" stroke-width="4"/>
+
+            <circle cx="450" cy="72" r="38" fill="var(--magenta)" fill-opacity=".15"/>
+
+            <circle cx="90" cy="72" r="22" fill="none" stroke="var(--purple)" stroke-width="2"/>
+            <circle cx="270" cy="72" r="22" fill="none" stroke="var(--purple)" stroke-width="2"/>
+            <circle cx="450" cy="72" r="30" fill="var(--magenta)"/>
+            <circle cx="630" cy="72" r="22" fill="none" stroke="var(--purple)" stroke-width="2"/>
+
+            <foreignObject x="81" y="63" width="18" height="18"><div xmlns="http://www.w3.org/1999/xhtml" style="color:var(--purple);font-size:13px;line-height:18px;text-align:center;"><i class="fa-solid fa-file-lines"></i></div></foreignObject>
+            <foreignObject x="261" y="63" width="18" height="18"><div xmlns="http://www.w3.org/1999/xhtml" style="color:var(--purple);font-size:13px;line-height:18px;text-align:center;"><i class="fa-solid fa-magnifying-glass"></i></div></foreignObject>
+            <foreignObject x="621" y="63" width="18" height="18"><div xmlns="http://www.w3.org/1999/xhtml" style="color:var(--purple);font-size:13px;line-height:18px;text-align:center;"><i class="fa-solid fa-clipboard-list"></i></div></foreignObject>
+            <foreignObject x="440" y="62" width="20" height="20"><div xmlns="http://www.w3.org/1999/xhtml" style="color:#fff;font-size:14px;line-height:20px;text-align:center;"><i class="fa-solid fa-clock"></i></div></foreignObject>
+
+            <foreignObject x="410" y="4" width="80" height="26"><div xmlns="http://www.w3.org/1999/xhtml" style="background:var(--magenta);color:#fff;font-family:var(--mono);font-size:11px;font-weight:700;text-align:center;padding:4px 0;border-radius:20px;box-shadow:0 6px 14px -4px rgba(194,24,91,.6);">4 días</div></foreignObject>
+          </svg>
+          <div class="bpm-flow-labels">
+            <div class="bpm-flow-label"><strong>Pre Factura</strong><span>De la atención hospitalaria</span></div>
+            <div class="bpm-flow-label"><strong>Auditoría</strong><span>Se realizan las observaciones en clínica</span></div>
+            <div class="bpm-flow-label hot"><strong>Delay · 4 días</strong><span>Se espera a que la clínica levante la observación — sin trazabilidad de pendientes si rota el auditor</span></div>
+            <div class="bpm-flow-label"><strong>Registro</strong><span>Forms sin campos calculados ni listas desplegables dependientes — se digitaba todo a mano, sin validación condicional</span></div>
+          </div>
+        </div>
       </div>
       <div class="excel-mock">
         <div class="excel-mock__head"><span>concurrente_recupero_v14_FINAL.xlsx</span><span>sin validar</span></div>
