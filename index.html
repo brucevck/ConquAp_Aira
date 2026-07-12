@@ -242,18 +242,45 @@
   .pa-alert .t{ font-family:var(--mono); font-size:11px; color:#fff; line-height:1.5; }
   .pa-alert .t strong{ color:var(--gold); display:block; margin-bottom:3px; }
 
-  /* ---------- ch05: impacto (dashboard mock) ---------- */
-  .dash-mock{
-    background:#fff; border:1px solid var(--line); border-radius:16px; padding:24px;
-    box-shadow:0 30px 60px -30px rgba(74,20,140,.3); margin-top:40px;
-  }
-  .dash-bars{ display:flex; align-items:flex-end; gap:14px; height:150px; margin-top:18px; }
-  .dash-bars .bar{ flex:1; background:linear-gradient(180deg,var(--magenta),var(--purple)); border-radius:6px 6px 0 0; position:relative; }
-  .dash-bars .bar span{ position:absolute; top:-22px; left:50%; transform:translateX(-50%); font-family:var(--mono); font-size:11px; color:var(--muted); }
+  /* ---------- ch05: impacto (rankings + line chart) ---------- */
+  #ch5 .split{ grid-template-columns:.85fr 1.15fr; }
+  .impact-bullets{ list-style:none; margin-top:28px; display:flex; flex-direction:column; gap:10px; }
+  .impact-bullets li{ display:flex; gap:10px; align-items:flex-start; font-size:14px; line-height:1.45; color:var(--ink); }
+  .impact-bullets i{ color:var(--cyan); margin-top:3px; flex-shrink:0; }
   .kpi-row{ display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-top:36px; }
   .kpi{ background:var(--tint); border-radius:12px; padding:18px 20px; }
   .kpi .n{ font-family:var(--disp); font-weight:800; font-size:30px; color:var(--purple); }
   .kpi .l{ font-size:12.5px; color:var(--muted); margin-top:4px; }
+
+  .rank-grid{ display:grid; grid-template-columns:1fr 1fr; gap:20px; }
+  .rank-panel{ background:#fff; border:1px solid var(--line); border-radius:16px; padding:20px 22px; box-shadow:0 30px 60px -30px rgba(74,20,140,.3); }
+  .rank-panel__title{ font-family:var(--mono); font-size:10.5px; color:var(--muted); text-transform:uppercase; letter-spacing:.05em; margin-bottom:16px; line-height:1.4; }
+  .rank-bar{ margin-bottom:13px; }
+  .rank-bar:last-child{ margin-bottom:0; }
+  .rank-bar__top{ display:flex; justify-content:space-between; gap:8px; font-size:12px; margin-bottom:5px; }
+  .rank-bar__name{ color:var(--ink); }
+  .rank-bar__value{ font-family:var(--mono); color:var(--purple); font-weight:700; white-space:nowrap; }
+  .rank-bar__track{ height:8px; background:var(--tint2); border-radius:6px; overflow:hidden; }
+  .rank-bar__fill{ height:100%; background:linear-gradient(90deg,var(--magenta),var(--purple)); border-radius:6px; }
+
+  .dash-mock{
+    background:#fff; border:1px solid var(--line); border-radius:16px; padding:24px;
+    box-shadow:0 30px 60px -30px rgba(74,20,140,.3); margin-top:20px;
+  }
+  .chart-legend{ display:flex; gap:18px; margin:2px 0 10px; }
+  .chart-legend__item{ display:flex; align-items:center; gap:6px; font-family:var(--mono); font-size:11px; color:var(--muted); }
+  .chart-legend__sw{ width:16px; height:2px; display:inline-block; background:linear-gradient(90deg,var(--magenta),var(--purple)); border-radius:2px; }
+  .chart-legend__sw--dashed{ background:none; border-top:2px dashed var(--muted); height:0; }
+  .chart-axis-label{ font-family:var(--mono); font-size:11px; fill:var(--muted); }
+  .chart-tip{
+    background:var(--tint); border:1px solid var(--purple); border-radius:8px; padding:5px 5px; font-family:var(--mono);
+    text-align:center; line-height:1.2; box-shadow:0 4px 10px -4px rgba(74,20,140,.25);
+  }
+  .chart-tip .amt{ font-size:11px; font-weight:700; color:var(--purple); }
+  .chart-tip .pct{ font-size:8px; color:var(--magenta); margin-top:1px; }
+  .chart-tip--muted{ border-color:var(--muted); padding:3px 7px; }
+  .chart-tip--muted .amt{ color:var(--muted); font-size:10.5px; }
+  .chart-subtitle{ font-size:12px; color:var(--muted); margin:-2px 0 12px; }
 
   /* ---------- BRIDGE ---------- */
   .bridge{ align-items:center; text-align:center; }
@@ -397,7 +424,7 @@
   @media (max-width:900px){
     .rail{ display:none; }
     main{ margin-left:0; }
-    .split, .ba-wrap, .audit-grid, .kpi-row, .result-grid, .demo-panel{ grid-template-columns:1fr !important; }
+    .split, .ba-wrap, .audit-grid, .kpi-row, .result-grid, .demo-panel, .rank-grid{ grid-template-columns:1fr !important; }
     .stat-board{ grid-template-columns:1fr !important; }
     .finding-row{ flex-direction:column; }
     .bpm-flow-labels{ grid-template-columns:repeat(2,1fr); row-gap:20px; }
@@ -673,23 +700,85 @@
   <!-- 05 IMPACTO -->
   <section class="chapter chapter--tint" id="ch5" data-label="El impacto real">
     <div class="eyebrow">Capítulo 05 — El impacto logrado</div>
-    <h2>El dashboard se volvió una herramienta de decisión, no solo de registro</h2>
-    <p class="lede">Se eliminó la dependencia del conocimiento tácito de una sola persona. Y con visibilidad real, la gerencia empezó a tomar decisiones que antes eran imposibles: reasignar auditores, incluir clínicas, medir quién recupera más.</p>
-    <div class="dash-mock">
-      <div class="excel-mock__head" style="background:transparent; padding:0 0 6px;"><span style="color:var(--purple); font-weight:700;">Recupero mensual — Auditoría concurrente</span><span>vista gerencial</span></div>
-      <div class="dash-bars">
-        <div class="bar" style="height:38%;"><span>Ene</span></div>
-        <div class="bar" style="height:46%;"><span>Feb</span></div>
-        <div class="bar" style="height:55%;"><span>Mar</span></div>
-        <div class="bar" style="height:68%;"><span>Abr</span></div>
-        <div class="bar" style="height:82%;"><span>May</span></div>
-        <div class="bar" style="height:100%;"><span>Jun</span></div>
+    <div class="split">
+      <div>
+        <h2>El dashboard se volvió una herramienta de decisión, no solo de registro</h2>
+        <ul class="impact-bullets">
+          <li><i class="fa-solid fa-check"></i> Se eliminó la dependencia del conocimiento tácito de una sola persona</li>
+          <li><i class="fa-solid fa-check"></i> La gerencia gana visibilidad real para tomar decisiones antes imposibles</li>
+          <li><i class="fa-solid fa-check"></i> Reasignación de auditores según carga y desempeño</li>
+          <li><i class="fa-solid fa-check"></i> Inclusión de clínicas mixtas al alcance de auditoría</li>
+          <li><i class="fa-solid fa-check"></i> Medición de quién recupera más — por auditor y por clínica</li>
+        </ul>
+        <div class="kpi-row">
+          <div class="kpi"><div class="n">+20%</div><div class="l">recupero mes a mes</div></div>
+          <div class="kpi"><div class="n">8%→9%</div><div class="l">tasa de recupero vs. preliquidación</div></div>
+          <div class="kpi"><div class="n">0</div><div class="l">dependencia de un solo especialista</div></div>
+        </div>
       </div>
-    </div>
-    <div class="kpi-row">
-      <div class="kpi"><div class="n">+20%</div><div class="l">recupero mes a mes</div></div>
-      <div class="kpi"><div class="n">8%→9%</div><div class="l">tasa de recupero vs. preliquidación</div></div>
-      <div class="kpi"><div class="n">0</div><div class="l">dependencia de un solo especialista</div></div>
+      <div>
+        <div class="rank-grid">
+          <div class="rank-panel">
+            <div class="rank-panel__title">Ranking de auditores — cantidad de registros</div>
+            <div class="rank-bar"><div class="rank-bar__top"><span class="rank-bar__name">Gabriel Heredia O.</span><span class="rank-bar__value">312</span></div><div class="rank-bar__track"><div class="rank-bar__fill" style="width:100%;"></div></div></div>
+            <div class="rank-bar"><div class="rank-bar__top"><span class="rank-bar__name">Irlando Cifuentes G.</span><span class="rank-bar__value">276</span></div><div class="rank-bar__track"><div class="rank-bar__fill" style="width:88%;"></div></div></div>
+            <div class="rank-bar"><div class="rank-bar__top"><span class="rank-bar__name">Carlos Paz Ch.</span><span class="rank-bar__value">241</span></div><div class="rank-bar__track"><div class="rank-bar__fill" style="width:77%;"></div></div></div>
+            <div class="rank-bar"><div class="rank-bar__top"><span class="rank-bar__name">Elias Rosario C.</span><span class="rank-bar__value">198</span></div><div class="rank-bar__track"><div class="rank-bar__fill" style="width:63%;"></div></div></div>
+            <div class="rank-bar"><div class="rank-bar__top"><span class="rank-bar__name">Martín Fuentes M.</span><span class="rank-bar__value">165</span></div><div class="rank-bar__track"><div class="rank-bar__fill" style="width:53%;"></div></div></div>
+          </div>
+          <div class="rank-panel">
+            <div class="rank-panel__title">Ranking de clínicas — mayor ahorro generado</div>
+            <div class="rank-bar"><div class="rank-bar__top"><span class="rank-bar__name">Clínica San Borja</span><span class="rank-bar__value">S/ 84,200</span></div><div class="rank-bar__track"><div class="rank-bar__fill" style="width:100%;"></div></div></div>
+            <div class="rank-bar"><div class="rank-bar__top"><span class="rank-bar__name">Clínica British Hospital</span><span class="rank-bar__value">S/ 71,500</span></div><div class="rank-bar__track"><div class="rank-bar__fill" style="width:85%;"></div></div></div>
+            <div class="rank-bar"><div class="rank-bar__top"><span class="rank-bar__name">Clínica San Pablo</span><span class="rank-bar__value">S/ 58,900</span></div><div class="rank-bar__track"><div class="rank-bar__fill" style="width:70%;"></div></div></div>
+            <div class="rank-bar"><div class="rank-bar__top"><span class="rank-bar__name">Clínica San Gabriel</span><span class="rank-bar__value">S/ 46,300</span></div><div class="rank-bar__track"><div class="rank-bar__fill" style="width:55%;"></div></div></div>
+            <div class="rank-bar"><div class="rank-bar__top"><span class="rank-bar__name">Clínica Valle Sur</span><span class="rank-bar__value">S/ 33,700</span></div><div class="rank-bar__track"><div class="rank-bar__fill" style="width:40%;"></div></div></div>
+          </div>
+        </div>
+        <div class="dash-mock">
+          <div class="excel-mock__head" style="background:transparent; padding:0 0 6px;"><span style="color:var(--purple); font-weight:700;">Recupero mensual — Auditoría concurrente</span><span>vista gerencial</span></div>
+          <div class="chart-subtitle">Variación del recupero respecto a la preliquidación.</div>
+          <div class="chart-legend">
+            <span class="chart-legend__item"><i class="chart-legend__sw"></i>Aprobado</span>
+            <span class="chart-legend__item"><i class="chart-legend__sw chart-legend__sw--dashed"></i>Pendientes</span>
+          </div>
+          <svg viewBox="0 0 690 255" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="ch5LineGrad" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0" stop-color="var(--magenta)"/>
+                <stop offset="1" stop-color="var(--purple)"/>
+              </linearGradient>
+            </defs>
+            <line x1="40" y1="205" x2="600" y2="205" stroke="var(--line)" stroke-width="1.5"/>
+            <polyline points="60,205 164,205 268,205 372,143.8 476,174.4 580,100" fill="none" stroke="var(--muted)" stroke-width="2" stroke-dasharray="5 5"/>
+            <polyline points="60,126.3 164,78.1 268,86.9 372,82.5 476,95.6 580,73.8" fill="none" stroke="url(#ch5LineGrad)" stroke-width="3"/>
+            <circle cx="372" cy="143.8" r="3.5" fill="var(--muted)"/>
+            <circle cx="476" cy="174.4" r="3.5" fill="var(--muted)"/>
+            <circle cx="580" cy="100" r="3.5" fill="var(--muted)"/>
+            <circle cx="60" cy="126.3" r="4.5" fill="var(--purple)" stroke="#fff" stroke-width="2"/>
+            <circle cx="164" cy="78.1" r="4.5" fill="var(--purple)" stroke="#fff" stroke-width="2"/>
+            <circle cx="268" cy="86.9" r="4.5" fill="var(--purple)" stroke="#fff" stroke-width="2"/>
+            <circle cx="372" cy="82.5" r="4.5" fill="var(--purple)" stroke="#fff" stroke-width="2"/>
+            <circle cx="476" cy="95.6" r="4.5" fill="var(--purple)" stroke="#fff" stroke-width="2"/>
+            <circle cx="580" cy="73.8" r="4.5" fill="var(--magenta)" stroke="#fff" stroke-width="2"/>
+            <foreignObject x="14" y="140" width="92" height="40"><div xmlns="http://www.w3.org/1999/xhtml" class="chart-tip"><div class="amt">S/ 1.8 mill</div><div class="pct">8.44% vs preliq.</div></div></foreignObject>
+            <foreignObject x="118" y="24" width="92" height="40"><div xmlns="http://www.w3.org/1999/xhtml" class="chart-tip"><div class="amt">S/ 2.9 mill</div><div class="pct">8.4% vs preliq.</div></div></foreignObject>
+            <foreignObject x="222" y="101" width="92" height="40"><div xmlns="http://www.w3.org/1999/xhtml" class="chart-tip"><div class="amt">S/ 2.7 mill</div><div class="pct">8.49% vs preliq.</div></div></foreignObject>
+            <foreignObject x="326" y="28" width="92" height="40"><div xmlns="http://www.w3.org/1999/xhtml" class="chart-tip"><div class="amt">S/ 2.8 mill</div><div class="pct">8.73% vs preliq.</div></div></foreignObject>
+            <foreignObject x="430" y="110" width="92" height="40"><div xmlns="http://www.w3.org/1999/xhtml" class="chart-tip"><div class="amt">S/ 2.5 mill</div><div class="pct">8.55% vs preliq.</div></div></foreignObject>
+            <foreignObject x="534" y="20" width="92" height="40"><div xmlns="http://www.w3.org/1999/xhtml" class="chart-tip"><div class="amt">S/ 3 mill</div><div class="pct">9.27% vs preliq.</div></div></foreignObject>
+            <foreignObject x="326" y="108" width="92" height="22"><div xmlns="http://www.w3.org/1999/xhtml" class="chart-tip chart-tip--muted"><div class="amt">S/ 1.4 mill</div></div></foreignObject>
+            <foreignObject x="430" y="188" width="92" height="22"><div xmlns="http://www.w3.org/1999/xhtml" class="chart-tip chart-tip--muted"><div class="amt">S/ 0.7 mill</div></div></foreignObject>
+            <foreignObject x="580" y="116" width="92" height="22"><div xmlns="http://www.w3.org/1999/xhtml" class="chart-tip chart-tip--muted"><div class="amt">S/ 2.4 mill</div></div></foreignObject>
+            <text class="chart-axis-label" x="60" y="227" text-anchor="middle">Ene</text>
+            <text class="chart-axis-label" x="164" y="227" text-anchor="middle">Feb</text>
+            <text class="chart-axis-label" x="268" y="227" text-anchor="middle">Mar</text>
+            <text class="chart-axis-label" x="372" y="227" text-anchor="middle">Abr</text>
+            <text class="chart-axis-label" x="476" y="227" text-anchor="middle">May</text>
+            <text class="chart-axis-label" x="580" y="227" text-anchor="middle">Jun</text>
+          </svg>
+        </div>
+      </div>
     </div>
   </section>
 
