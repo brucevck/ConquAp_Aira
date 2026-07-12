@@ -169,24 +169,25 @@
   .excel-row.bad div{ color:var(--magenta); }
   .excel-row.head div{ font-weight:700; color:var(--ink); background:#FAF7FC; }
 
-  /* ---------- ch03: numeros ocultos (stamp) ---------- */
-  .stat-board{ display:grid; grid-template-columns:repeat(4,1fr); gap:18px; margin-top:44px; }
+  /* ---------- ch03: numeros ocultos ---------- */
+  #ch3{ padding-top:90px; padding-bottom:70px; }
+  .stat-board{ display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-top:32px; }
   .stat-card{
     background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.22); border-radius:16px;
-    padding:26px 20px; position:relative; overflow:hidden;
+    padding:22px 18px; position:relative; overflow:hidden;
   }
-  .stat-card .num-big{ font-family:var(--disp); font-weight:800; font-size:clamp(34px,3.4vw,50px); color:var(--gold); }
-  .stat-card .cap{ font-size:13px; color:#F0DCF2; margin-top:8px; line-height:1.4; }
+  .stat-card .num-big{ font-family:var(--disp); font-weight:800; font-size:clamp(28px,3vw,42px); color:#fff; }
+  .stat-card .cap{ font-size:12.5px; color:#F0DCF2; margin-top:6px; line-height:1.4; }
+  .stat-card--emphasis{ border:2px solid var(--cyan); background:rgba(0,183,195,.1); }
+  .stat-card--emphasis .num-big{ color:var(--cyan); }
+  .stat-card--emphasis .tag{
+    display:inline-block; margin-top:8px; font-family:var(--mono); font-size:9.5px; letter-spacing:.08em; text-transform:uppercase;
+    color:var(--cyan); border:1px solid var(--cyan); padding:3px 8px; border-radius:5px;
+  }
+  .finding-row{ display:flex; justify-content:center; gap:16px; margin-top:16px; }
+  .finding-row .stat-card--finding{ flex:0 1 calc((100% - 32px)/3); }
   .stat-card--finding{ display:flex; flex-direction:column; align-items:center; text-align:center; justify-content:center; }
-  .stat-card--finding i{ font-size:30px; color:var(--gold); margin-bottom:12px; }
-  .stat-card--finding .fa-stack{ font-size:15px; margin-bottom:12px; }
-  .stat-card--finding .fa-stack i{ margin-bottom:0; }
-  .stamp{
-    position:absolute; top:14px; right:14px; font-family:var(--mono); font-size:9.5px; letter-spacing:.08em;
-    border:1.5px solid var(--gold); color:var(--gold); padding:3px 7px; border-radius:5px; transform:rotate(6deg);
-    text-transform:uppercase;
-  }
-  .board-note{ margin-top:34px; max-width:60ch; font-size:15px; color:#F3E4F5; line-height:1.65; border-left:2px solid var(--gold); padding-left:18px; }
+  .stat-card--finding i{ font-size:26px; color:var(--gold); margin-bottom:10px; }
 
   /* ---------- ch04: solucion before/after ---------- */
   .ba-wrap{ display:grid; grid-template-columns:1fr auto 1fr; gap:26px; align-items:center; margin-top:44px; }
@@ -306,7 +307,8 @@
     .rail{ display:none; }
     main{ margin-left:0; }
     .split, .ba-wrap, .audit-grid, .kpi-row, .result-grid, .demo-panel{ grid-template-columns:1fr !important; }
-    .stat-board{ grid-template-columns:repeat(2,1fr) !important; }
+    .stat-board{ grid-template-columns:1fr !important; }
+    .finding-row{ flex-direction:column; }
     .ba-arrow{ transform:rotate(90deg); justify-self:center; }
     .demo-pipeline{ flex-wrap:wrap; gap:16px; }
     .demo-node{ width:28%; }
@@ -439,22 +441,13 @@
     <p class="lede">Al meternos a fondo en la data de concurrente, aparecieron cosas que nadie había podido medir antes — porque nunca existió un sistema que las pudiera detectar.</p>
     <div class="stat-board">
       <div class="stat-card"><div class="num-big">2,500</div><div class="cap">registros mensuales en auditoría concurrente</div></div>
-      <div class="stat-card"><div class="num-big">70%</div><div class="cap">se podía medir contra sistemas core (match por N° de carta/factura)</div></div>
-      <div class="stat-card"><div class="num-big">80%</div><div class="cap">requería limpieza manual, sin N° de factura ni carta de garantía (normal en concurrente: la facturación se genera recién después del visto bueno en clínica)</div><div class="stamp">evidencia</div></div>
-      <div class="stat-card"><div class="num-big">4 días</div><div class="cap">delay promedio hasta que la clínica levantaba la observación</div></div>
-
+      <div class="stat-card"><div class="num-big">80%</div><div class="cap">requería limpieza manual, sin N° de factura ni carta de garantía</div></div>
+      <div class="stat-card stat-card--emphasis"><div class="num-big">7.1%</div><div class="tag">Objetivo a atacar</div><div class="cap">nunca se aplicaba la observación — se perdía en el limbo cuando rotaba el auditor</div></div>
+    </div>
+    <div class="finding-row">
       <div class="stat-card stat-card--finding"><i class="fa-solid fa-brain"></i><div class="cap">Dependencia total del conocimiento tácito del gerente para poder limpiar la data</div></div>
       <div class="stat-card stat-card--finding"><i class="fa-solid fa-rotate"></i><div class="cap">Duplicados invisibles en cambio de turno de auditores</div></div>
-      <div class="stat-card stat-card--finding">
-        <span class="fa-stack">
-          <i class="fa-solid fa-shield-halved fa-stack-1x"></i>
-          <i class="fa-solid fa-slash fa-stack-1x" style="color:var(--magenta);"></i>
-        </span>
-        <div class="cap">Forms sin validación — se podía ingresar cualquier dato en cualquier campo</div>
-      </div>
-      <div class="stat-card stat-card--finding"><i class="fa-solid fa-link-slash"></i><div class="cap">Sin trazabilidad de pendientes cuando rotaba el médico o la clínica</div></div>
     </div>
-    <p class="board-note">Un 7.1% de las observaciones nunca se aplicaba — se perdía en el limbo cuando rotaba el auditor. Ese fue justamente el hueco que ConquApp resolvió con un ID propio de mapeo. Sigue leyendo.</p>
   </section>
 
   <!-- 04 SOLUCION -->
