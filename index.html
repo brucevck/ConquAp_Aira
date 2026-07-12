@@ -164,6 +164,14 @@
     font-family:var(--mono); font-size:10.5px; color:var(--muted); line-height:1.4;
     display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;
   }
+  .bpm-flow-list{
+  list-style:none; margin:0; padding:0;
+  font-family:var(--mono); font-size:10.5px; color:var(--muted); line-height:1.5;
+  display:flex; flex-direction:column; gap:2px; text-align:left;
+}
+.bpm-flow-list li{ padding-left:10px; position:relative; }
+.bpm-flow-list li::before{ content:'–'; position:absolute; left:0; color:var(--muted); }
+.bpm-flow-label.hot .bpm-flow-list li::before{ color:var(--magenta); }
   .excel-mock{
     background:#fff; border:1px solid var(--line); border-radius:14px; overflow:hidden;
     box-shadow:0 30px 60px -30px rgba(74,20,140,.35);
@@ -448,8 +456,19 @@
           <div class="bpm-flow-labels">
             <div class="bpm-flow-label"><strong>Pre Factura</strong><span>De la atención hospitalaria</span></div>
             <div class="bpm-flow-label"><strong>Auditoría</strong><span>Se realizan las observaciones en clínica</span></div>
-            <div class="bpm-flow-label hot"><strong>Delay · 4 días</strong><span>Se espera a que la clínica levante la observación — sin trazabilidad de pendientes si rota el auditor</span></div>
-            <div class="bpm-flow-label"><strong>Registro</strong><span>Forms sin campos calculados ni listas desplegables dependientes — se digitaba todo a mano, sin validación condicional</span></div>
+            <div class="bpm-flow-label hot"><strong>Delay · 4 días</strong>
+              <ul class="bpm-flow-list">
+                <li>Se espera a que la clínica levante la observación</li>
+                <li>sin trazabilidad de pendientes si rota el auditor</li>
+              </ul>
+            </div>
+            <div class="bpm-flow-label"><strong>Registro</strong>
+              <ul class="bpm-flow-list">
+                <li>Forms sin campos calculados</li>
+                <li>Sin listas desplegables</li>
+                <li>Sin validación condicional</li>
+              </ul>
+            </div>
           </div>
         </div>
       </div>
